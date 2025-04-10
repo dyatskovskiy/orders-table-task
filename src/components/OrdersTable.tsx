@@ -1,33 +1,74 @@
+'use client';
+
 import React, { FC } from 'react';
 import { Table } from './Table/Table';
 import { IOrder } from '@/interfaces/order.interface';
 import { StatusBadge } from '@/components/StatusBadge';
 import { Icon } from '@/components/Icon';
 import Image from 'next/image';
+import { useSort } from '@/components/Table/sort-context';
+
+type SortKey = keyof IOrder;
 
 interface OrdersTableProps {
   orders: IOrder[];
 }
 
 export const OrdersTable: FC<OrdersTableProps> = ({ orders }) => {
+  const { sortBy, order } = useSort();
+
+  const sortedOrders: IOrder[] = [...orders].sort((a, b) => {
+    const aValue = a[sortBy as SortKey];
+    const bValue = b[sortBy as SortKey];
+
+    if (aValue < bValue) return order === 'asc' ? -1 : 1;
+    if (aValue > bValue) return order === 'asc' ? 1 : -1;
+
+    return 0;
+  });
+
   return (
     <div>
       <Table>
         <Table.Head>
           <Table.Row className='odd:bg-white dark:odd:bg-violet-dark grid orders-table-columns items-center'>
             <Table.Cell header={true}>Tracking ID</Table.Cell>
-            <Table.Cell header={true}>Product</Table.Cell>
-            <Table.Cell header={true}>Customer</Table.Cell>
-            <Table.Cell header={true}>Date</Table.Cell>
+            <Table.Cell
+              columnKey={'productName'}
+              isSortableColumn={true}
+              header={true}
+            >
+              Product
+            </Table.Cell>
+            <Table.Cell
+              columnKey={'customer'}
+              isSortableColumn={true}
+              header={true}
+            >
+              Customer
+            </Table.Cell>
+            <Table.Cell
+              columnKey={'date'}
+              isSortableColumn={true}
+              header={true}
+            >
+              Date
+            </Table.Cell>
             <Table.Cell header={true}>Amount</Table.Cell>
             <Table.Cell header={true}>Payment Mode</Table.Cell>
-            <Table.Cell header={true}>Status</Table.Cell>
+            <Table.Cell
+              columnKey={'status'}
+              isSortableColumn={true}
+              header={true}
+            >
+              Status
+            </Table.Cell>
             <Table.Cell header={true}>Action</Table.Cell>
           </Table.Row>
         </Table.Head>
 
         <Table.Body>
-          {orders.map((order) => {
+          {sortedOrders.map((order) => {
             const {
               trackingId,
               productName,
