@@ -9,11 +9,11 @@ import {
   useState,
 } from 'react';
 
-type SortOrder = 'asc' | 'desc';
+type sortDirection = 'asc' | 'desc';
 
 type SortState = {
   sortBy: string;
-  order: SortOrder;
+  direction: sortDirection;
   setSort: (key: string) => void;
 };
 
@@ -29,23 +29,23 @@ export const useSort = () => {
 
 export const SortProvider = ({ children }: { children: ReactNode }) => {
   const [sortBy, setSortBy] = useState('');
-  const [order, setOrder] = useState<SortOrder>('asc');
+  const [direction, setDirection] = useState<sortDirection>('asc');
 
   const setSort = useCallback(
     (key: string) => {
       if (sortBy === key) {
-        setOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'));
+        setDirection((prev) => (prev === 'asc' ? 'desc' : 'asc'));
       } else {
         setSortBy(key);
-        setOrder('asc');
+        setDirection('asc');
       }
     },
     [sortBy],
   );
 
   const value = useMemo(
-    () => ({ sortBy, order, setSort }),
-    [sortBy, order, setSort],
+    () => ({ sortBy, direction, setSort }),
+    [sortBy, direction, setSort],
   );
 
   return <SortContext.Provider value={value}>{children}</SortContext.Provider>;

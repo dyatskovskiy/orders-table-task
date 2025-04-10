@@ -1,10 +1,14 @@
-import * as orders from '@/temp-data/orders.json';
+import * as fs from 'fs';
+import * as path from 'path';
 
-import { NextRequest, NextResponse } from 'next/server';
-import { mapRawOrdersToOrders } from '@/app/api/orders/mappers';
+import { NextResponse } from 'next/server';
+import { IOrder } from '@/interfaces/order.interface';
 
-export const GET = (req: NextRequest): NextResponse => {
-  const mappedOrders = mapRawOrdersToOrders(Array.from(orders));
+const ordersFilePath = path.resolve('temp-data', 'orders.json');
 
-  return NextResponse.json({ data: mappedOrders }, { status: 200 });
+export const GET = (): NextResponse => {
+  const fileData = fs.readFileSync(ordersFilePath, 'utf-8');
+  const orders: IOrder[] = JSON.parse(fileData);
+
+  return NextResponse.json({ data: orders }, { status: 200 });
 };

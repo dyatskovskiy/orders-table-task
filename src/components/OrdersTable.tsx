@@ -1,31 +1,64 @@
 'use client';
 
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Table } from './Table/Table';
 import { IOrder } from '@/interfaces/order.interface';
 import { StatusBadge } from '@/components/StatusBadge';
 import { Icon } from '@/components/Icon';
 import Image from 'next/image';
 import { useSort } from '@/components/Table/sort-context';
+import { fetchData } from '@/lib/fetchData';
 
 type SortKey = keyof IOrder;
 
-interface OrdersTableProps {
-  orders: IOrder[];
-}
+export const OrdersTable: FC = ({}) => {
+  // SORT
+  const [orders, setOrders] = useState<IOrder[]>([]);
 
-export const OrdersTable: FC<OrdersTableProps> = ({ orders }) => {
-  const { sortBy, order } = useSort();
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const { data: orders } = await fetchData<IOrder[]>('/orders', {
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      setOrders(orders);
+    };
+
+    fetchOrders();
+  }, []);
+
+  const { sortBy, direction } = useSort();
 
   const sortedOrders: IOrder[] = [...orders].sort((a, b) => {
     const aValue = a[sortBy as SortKey];
     const bValue = b[sortBy as SortKey];
 
-    if (aValue < bValue) return order === 'asc' ? -1 : 1;
-    if (aValue > bValue) return order === 'asc' ? 1 : -1;
+    if (aValue < bValue) return direction === 'asc' ? -1 : 1;
+    if (aValue > bValue) return direction === 'asc' ? 1 : -1;
 
     return 0;
   });
+
+  // DELETE
+  const handleDelete = async (trackingId: number) => {
+    try {
+      const response = await fetch(`/api/orders/${trackingId}`, {
+        method: 'DELETE',
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setOrders((prev) =>
+          prev.filter((order) => order.trackingId !== trackingId),
+        );
+      } else {
+        alert(data.error || 'Something went wrong! Try again');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div>
@@ -113,9 +146,12 @@ export const OrdersTable: FC<OrdersTableProps> = ({ orders }) => {
                   <StatusBadge status={status}>{status}</StatusBadge>
                 </Table.Cell>
                 <Table.Cell>
-                  <button>
+                  <button
+                    className={'w-6 h-6 cursor-pointer'}
+                    onClick={() => handleDelete(trackingId)}
+                  >
                     <Icon
-                      name={'bin'}
+                      name={'trash'}
                       className={'stroke-[#A30D11] fill-none'}
                     />
                   </button>

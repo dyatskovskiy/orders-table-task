@@ -20,7 +20,7 @@ export const TableCell: FC<TableCellProps> = ({
   columnKey = '',
   isSortableColumn = false,
 }) => {
-  const { sortBy, order, setSort } = useSort();
+  const { sortBy, direction, setSort } = useSort();
   const isActiveColumn = sortBy == columnKey;
 
   if (header) {
@@ -40,14 +40,14 @@ export const TableCell: FC<TableCellProps> = ({
               name={'sort-asc'}
               className={classNames(
                 'absolute top-[30%] right-[-5px] w-1 h-1 fill-light dark:fill-grey',
-                `${isActiveColumn && order == 'asc' && 'fill-grey dark:fill-light'}`,
+                `${isActiveColumn && direction == 'asc' && 'fill-grey dark:fill-light'}`,
               )}
             />
             <Icon
               name={'sort-desc'}
               className={classNames(
                 'absolute top-[30%] right-[-5px] w-1 h-1 fill-light dark:fill-grey',
-                `${isActiveColumn && order == 'desc' && 'fill-grey dark:fill-light'}`,
+                `${isActiveColumn && direction == 'desc' && 'fill-grey dark:fill-light'}`,
               )}
             />
           </span>
