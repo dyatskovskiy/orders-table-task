@@ -210,16 +210,6 @@
     "status": "Process"
   },
   {
-    "trackingId": 37173,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Self-enabling demand-driven attitude",
-    "customer": "Donna Christian",
-    "date": "2024-03-09",
-    "amount": 549.69,
-    "paymentMode": "Debit Card",
-    "status": "Process"
-  },
-  {
     "trackingId": 19348,
     "productImage": "https://picsum.photos/2000/3000",
     "productName": "Versatile 24hour attitude",
@@ -237,16 +227,6 @@
     "date": "2024-08-08",
     "amount": 764.22,
     "paymentMode": "Credit Card",
-    "status": "Cancelled"
-  },
-  {
-    "trackingId": 22576,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Grass-roots coherent orchestration",
-    "customer": "Paula Herman",
-    "date": "2024-04-18",
-    "amount": 249.58,
-    "paymentMode": "Bank Transfer",
     "status": "Cancelled"
   },
   {
@@ -280,16 +260,6 @@
     "status": "Cancelled"
   },
   {
-    "trackingId": 98914,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Customizable eco-centric protocol",
-    "customer": "Michael Jones",
-    "date": "2024-02-22",
-    "amount": 805.91,
-    "paymentMode": "Debit Card",
-    "status": "Process"
-  },
-  {
     "trackingId": 21104,
     "productImage": "https://picsum.photos/2000/3000",
     "productName": "Advanced fault-tolerant application",
@@ -316,16 +286,6 @@
     "customer": "John Hahn",
     "date": "2024-05-28",
     "amount": 853.86,
-    "paymentMode": "Credit Card",
-    "status": "Process"
-  },
-  {
-    "trackingId": 98544,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Object-based attitude-oriented success",
-    "customer": "Daniel Mccoy",
-    "date": "2023-12-13",
-    "amount": 597.27,
     "paymentMode": "Credit Card",
     "status": "Process"
   },
