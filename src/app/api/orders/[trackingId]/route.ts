@@ -12,9 +12,6 @@ export const DELETE = async (
   const trackingIdString = (await params).trackingId;
   const trackingId = parseInt(trackingIdString, 10);
 
-  console.log(trackingId);
-  console.log(typeof trackingId);
-
   if (!trackingId) {
     return NextResponse.json(
       { error: 'Tracking ID is required' },

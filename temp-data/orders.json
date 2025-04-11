@@ -520,16 +520,6 @@
     "status": "Delivered"
   },
   {
-    "trackingId": 63456,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Seamless logistical frame",
-    "customer": "Anthony Morrison",
-    "date": "2023-11-26",
-    "amount": 700.9,
-    "paymentMode": "Debit Card",
-    "status": "Cancelled"
-  },
-  {
     "trackingId": 67091,
     "productImage": "https://picsum.photos/2000/3000",
     "productName": "Phased demand-driven adapter",

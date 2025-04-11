@@ -28,7 +28,7 @@ export const OrdersTable: React.FC = () => {
   // INITIAL FETCH
   useEffect(() => {
     (async () => {
-      const { data: orders } = await fetchData<IOrder[]>('/orders', {
+      const { data: orders } = await fetchData<IOrder[]>('/api/orders', {
         headers: { 'Content-Type': 'application/json' },
       });
 
