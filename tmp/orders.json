@@ -10,62 +10,12 @@
     "status": "Cancelled"
   },
   {
-    "trackingId": 20669,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Reduced 3rdgeneration Graphic Interface",
-    "customer": "Steven Guerrero",
-    "date": "2024-02-07",
-    "amount": 248.75,
-    "paymentMode": "Cash on Delivery",
-    "status": "Delivered"
-  },
-  {
-    "trackingId": 55147,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Automated context-sensitive budgetary management",
-    "customer": "Steven Nunez",
-    "date": "2024-08-11",
-    "amount": 116.87,
-    "paymentMode": "Bank Transfer",
-    "status": "Delivered"
-  },
-  {
-    "trackingId": 21580,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Fundamental zero tolerance infrastructure",
-    "customer": "Andrea Young",
-    "date": "2024-03-23",
-    "amount": 392.31,
-    "paymentMode": "Credit Card",
-    "status": "Delivered"
-  },
-  {
-    "trackingId": 66868,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Focused optimizing workforce",
-    "customer": "Christopher Lopez",
-    "date": "2023-10-11",
-    "amount": 231.78,
-    "paymentMode": "Debit Card",
-    "status": "Delivered"
-  },
-  {
     "trackingId": 77598,
     "productImage": "https://picsum.photos/2000/3000",
     "productName": "Centralized stable website",
     "customer": "Adam Hawkins",
     "date": "2024-08-12",
     "amount": 737.41,
-    "paymentMode": "Credit Card",
-    "status": "Delivered"
-  },
-  {
-    "trackingId": 48918,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Programmable responsive open system",
-    "customer": "John Clark",
-    "date": "2023-10-26",
-    "amount": 777,
     "paymentMode": "Credit Card",
     "status": "Delivered"
   },
