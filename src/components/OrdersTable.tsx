@@ -66,7 +66,7 @@ export const OrdersTable: React.FC<OrdersTableProps> = ({ initialOrders }) => {
   // PAGINATION
   const totalPages = useMemo(() => {
     return Math.ceil(sortedOrders.length / limit);
-  }, [filteredOrders, limit]);
+  }, [sortedOrders, limit]);
   const paginatedOrders = paginateArray(sortedOrders, currentPage, limit);
 
   // DELETE
