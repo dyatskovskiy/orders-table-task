@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import { IOrder } from '@/interfaces/order.interface';
 import path from 'node:path';
+import { initializeOrdersFile } from '@/lib/initOrdersTempFile';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const ordersFilePath = isProduction
@@ -12,6 +13,8 @@ export const DELETE = async (
   req: NextRequest,
   { params }: { params: Promise<{ trackingId: string }> },
 ): Promise<NextResponse> => {
+  initializeOrdersFile();
+
   const trackingIdString = (await params).trackingId;
   const trackingId = parseInt(trackingIdString, 10);
 
