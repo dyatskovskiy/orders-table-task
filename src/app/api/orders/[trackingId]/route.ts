@@ -3,7 +3,7 @@ import fs from 'fs';
 import { IOrder } from '@/interfaces/order.interface';
 import path from 'path';
 
-const ordersFilePath = path.resolve('temp-data', 'orders.json');
+const ordersFilePath = path.resolve('tmp', 'orders.json');
 
 export const DELETE = async (
   req: NextRequest,

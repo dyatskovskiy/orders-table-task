@@ -450,26 +450,6 @@
     "status": "Cancelled"
   },
   {
-    "trackingId": 69030,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Ameliorated demand-driven contingency",
-    "customer": "Catherine Davis",
-    "date": "2024-04-11",
-    "amount": 242.08,
-    "paymentMode": "Bank Transfer",
-    "status": "Cancelled"
-  },
-  {
-    "trackingId": 16648,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Focused client-server open architecture",
-    "customer": "Alison Terry",
-    "date": "2023-09-06",
-    "amount": 965.86,
-    "paymentMode": "Bank Transfer",
-    "status": "Cancelled"
-  },
-  {
     "trackingId": 69811,
     "productImage": "https://picsum.photos/2000/3000",
     "productName": "Seamless optimizing artificial intelligence",
@@ -2868,15 +2848,5 @@
     "amount": 475.87,
     "paymentMode": "Cash on Delivery",
     "status": "Process"
-  },
-  {
-    "trackingId": 64926,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Inverse zero tolerance knowledgebase",
-    "customer": "Thomas Pope",
-    "date": "2024-07-08",
-    "amount": 254.36,
-    "paymentMode": "Cash on Delivery",
-    "status": "Cancelled"
   }
 ]
