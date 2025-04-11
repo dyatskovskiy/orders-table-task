@@ -9,10 +9,12 @@ const ordersFilePath = isProduction
   : path.join(process.cwd(), 'tmp', 'orders.json');
 
 export const initializeOrdersFile = () => {
-  if (!fs.existsSync(ordersFilePath)) {
-    fs.writeFileSync(ordersFilePath, JSON.stringify(mockOrdersData));
-    console.log('orders.json created successfully.');
-  } else {
-    console.log('orders.json is exists.');
+  // always write fresh file with mock-data
+  if (fs.existsSync(ordersFilePath)) {
+    fs.unlinkSync(ordersFilePath);
+    console.log('Existing orders.json file deleted.');
   }
+
+  fs.writeFileSync(ordersFilePath, JSON.stringify(mockOrdersData, null, 2));
+  console.log('orders.json created successfully at:', ordersFilePath);
 };
