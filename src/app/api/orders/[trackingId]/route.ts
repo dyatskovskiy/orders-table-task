@@ -1,13 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import { IOrder } from '@/interfaces/order.interface';
-import path from 'path';
 
-const env = process.env.NODE_ENV;
-const ordersFilePath =
-  env == 'production'
-    ? '/tmp/orders.json'
-    : path.join(process.cwd(), 'tmp', 'orders.json');
+const ordersFilePath = '/tmp/orders.json';
 
 export const DELETE = async (
   req: NextRequest,

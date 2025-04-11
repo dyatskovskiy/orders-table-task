@@ -1,15 +1,10 @@
 import * as fs from 'fs';
-import * as path from 'path';
 
 import { NextResponse } from 'next/server';
 import { IOrder } from '@/interfaces/order.interface';
 import { initializeOrdersFile } from '@/lib/initOrdersTempFile';
 
-const env = process.env.NODE_ENV;
-const ordersFilePath =
-  env === 'production'
-    ? '/tmp/orders.json'
-    : path.join(process.cwd(), 'tmp', 'orders.json');
+const ordersFilePath = '/tmp/orders.json';
 
 export const GET = (): NextResponse => {
   // create new orders.json if not exists on server
