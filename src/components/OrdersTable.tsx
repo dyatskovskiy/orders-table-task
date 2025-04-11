@@ -6,7 +6,6 @@ import { IOrder } from '@/interfaces/order.interface';
 import { StatusBadge } from '@/components/StatusBadge';
 import { Icon } from '@/components/Icon';
 import Image from 'next/image';
-import { fetchData } from '@/lib/fetchData';
 import { Popover } from '@/components/Popover/Popover';
 import { Input } from '@/components/Input';
 import { useSort } from '@/components/Table/sort-context/sort-context';
@@ -17,7 +16,11 @@ import { OrdersPaginationControlPanel } from '@/components/OrdersPaginationContr
 
 type SortKey = keyof IOrder;
 
-export const OrdersTable: React.FC = () => {
+interface OrdersTableProps {
+  initialOrders: IOrder[];
+}
+
+export const OrdersTable: React.FC<OrdersTableProps> = ({ initialOrders }) => {
   const { filter, setFilter } = useFilter();
 
   const { limit, setLimit, items, setItems, currentPage, setCurrentPage } =
@@ -25,20 +28,14 @@ export const OrdersTable: React.FC = () => {
 
   const { sortBy, direction } = useSort();
 
-  // INITIAL FETCH
   useEffect(() => {
-    (async () => {
-      const { data: orders } = await fetchData<IOrder[]>('/api/orders', {
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      setItems(orders);
-    })();
-  }, [setItems]);
+    setItems(initialOrders);
+  }, [initialOrders, setItems]);
 
   // FILTER
   const onFilterChange = (filter: string) => {
     setFilter(filter);
+    setCurrentPage(1);
   };
   const filteredOrders = useMemo(() => {
     const searchString = filter.toLowerCase();
