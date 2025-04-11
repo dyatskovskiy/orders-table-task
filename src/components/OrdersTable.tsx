@@ -112,17 +112,38 @@ export const OrdersTable: React.FC<OrdersTableProps> = ({ initialOrders }) => {
           >
             {limit != 10 && (
               <Popover.ListItem className={'cursor-pointer'}>
-                <span onClick={() => setLimit(10)}>10</span>
+                <span
+                  onClick={() => {
+                    setLimit(10);
+                    setCurrentPage(1);
+                  }}
+                >
+                  10
+                </span>
               </Popover.ListItem>
             )}
             {limit != 25 && (
               <Popover.ListItem className={'cursor-pointer'}>
-                <span onClick={() => setLimit(25)}>25</span>
+                <span
+                  onClick={() => {
+                    setLimit(25);
+                    setCurrentPage(1);
+                  }}
+                >
+                  25
+                </span>
               </Popover.ListItem>
             )}
             {limit != 50 && (
               <Popover.ListItem className={'cursor-pointer'}>
-                <span onClick={() => setLimit(50)}>50</span>
+                <span
+                  onClick={() => {
+                    setLimit(50);
+                    setCurrentPage(1);
+                  }}
+                >
+                  50
+                </span>
               </Popover.ListItem>
             )}
           </Popover.List>

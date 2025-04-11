@@ -50,16 +50,6 @@
     "status": "Delivered"
   },
   {
-    "trackingId": 13907,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Stand-alone incremental analyzer",
-    "customer": "Samantha Walker",
-    "date": "2024-03-24",
-    "amount": 113.98,
-    "paymentMode": "Paypal",
-    "status": "Delivered"
-  },
-  {
     "trackingId": 77598,
     "productImage": "https://picsum.photos/2000/3000",
     "productName": "Centralized stable website",
@@ -88,16 +78,6 @@
     "amount": 552.55,
     "paymentMode": "Debit Card",
     "status": "Delivered"
-  },
-  {
-    "trackingId": 64280,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Versatile hybrid monitoring",
-    "customer": "Randall Beck",
-    "date": "2024-03-21",
-    "amount": 33.79,
-    "paymentMode": "Debit Card",
-    "status": "Process"
   },
   {
     "trackingId": 47486,
