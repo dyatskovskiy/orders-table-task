@@ -1,14 +1,19 @@
 import { Container } from '@/components/Container';
 import { OrdersTable } from '@/components/OrdersTable';
+import { FilterProvider } from '@/components/Table/filter-context/filter-context';
+import { SortProvider } from '@/components/Table/sort-context/sort-context';
+import { OrdersPaginationProvider } from '@/components/Table/pagination-context/orders-pagination-context';
 
-import { SortProvider } from '@/components/Table/sort-context';
-
-export default async function Home() {
+export default function OrdersPage() {
   return (
-    <SortProvider>
-      <Container>
-        <OrdersTable />
-      </Container>
-    </SortProvider>
+    <FilterProvider>
+      <OrdersPaginationProvider>
+        <SortProvider>
+          <Container>
+            <OrdersTable />
+          </Container>
+        </SortProvider>
+      </OrdersPaginationProvider>
+    </FilterProvider>
   );
 }

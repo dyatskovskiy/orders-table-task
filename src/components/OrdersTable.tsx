@@ -1,35 +1,62 @@
 'use client';
 
-import React, { FC, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useMemo } from 'react';
 import { Table } from './Table/Table';
 import { IOrder } from '@/interfaces/order.interface';
 import { StatusBadge } from '@/components/StatusBadge';
 import { Icon } from '@/components/Icon';
 import Image from 'next/image';
-import { useSort } from '@/components/Table/sort-context';
 import { fetchData } from '@/lib/fetchData';
+import { Popover } from '@/components/Popover/Popover';
+import { Input } from '@/components/Input';
+import { useSort } from '@/components/Table/sort-context/sort-context';
+import { useFilter } from '@/components/Table/filter-context/filter-context';
+import { useOrdersPagination } from '@/components/Table/pagination-context/orders-pagination-context';
+import { paginateArray } from '@/lib/paginateArray';
+import { OrdersPaginationControlPanel } from '@/components/OrdersPaginationControlPanel';
 
 type SortKey = keyof IOrder;
 
-export const OrdersTable: FC = ({}) => {
-  // SORT
-  const [orders, setOrders] = useState<IOrder[]>([]);
+export const OrdersTable: React.FC = () => {
+  const { filter, setFilter } = useFilter();
 
+  const { limit, setLimit, items, setItems, currentPage, setCurrentPage } =
+    useOrdersPagination();
+
+  const { sortBy, direction } = useSort();
+
+  // INITIAL FETCH
   useEffect(() => {
-    const fetchOrders = async () => {
+    (async () => {
       const { data: orders } = await fetchData<IOrder[]>('/orders', {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      setOrders(orders);
-    };
+      setItems(orders);
+    })();
+  }, [setItems]);
 
-    fetchOrders();
-  }, []);
+  // FILTER
+  const onFilterChange = (filter: string) => {
+    setFilter(filter);
+  };
+  const filteredOrders = useMemo(() => {
+    const searchString = filter.toLowerCase();
 
-  const { sortBy, direction } = useSort();
+    return items.filter((order: IOrder) => {
+      return (
+        order.productName.toLowerCase().includes(searchString) ||
+        order.customer.toLowerCase().includes(searchString) ||
+        order.trackingId.toString().includes(searchString) ||
+        order.date.toString().includes(searchString) ||
+        order.status.toLowerCase().includes(searchString) ||
+        order.paymentMode.toLowerCase().includes(searchString)
+      );
+    });
+  }, [items, filter]);
 
-  const sortedOrders: IOrder[] = [...orders].sort((a, b) => {
+  // SORT
+  const sortedOrders: IOrder[] = [...filteredOrders].sort((a, b) => {
     const aValue = a[sortBy as SortKey];
     const bValue = b[sortBy as SortKey];
 
@@ -38,6 +65,12 @@ export const OrdersTable: FC = ({}) => {
 
     return 0;
   });
+
+  // PAGINATION
+  const totalPages = useMemo(() => {
+    return Math.ceil(sortedOrders.length / limit);
+  }, [filteredOrders, limit]);
+  const paginatedOrders = paginateArray(sortedOrders, currentPage, limit);
 
   // DELETE
   const handleDelete = async (trackingId: number) => {
@@ -49,9 +82,7 @@ export const OrdersTable: FC = ({}) => {
       const data = await response.json();
 
       if (response.ok) {
-        setOrders((prev) =>
-          prev.filter((order) => order.trackingId !== trackingId),
-        );
+        setItems(items.filter((order) => order.trackingId !== trackingId));
       } else {
         alert(data.error || 'Something went wrong! Try again');
       }
@@ -61,7 +92,65 @@ export const OrdersTable: FC = ({}) => {
   };
 
   return (
-    <div>
+    <>
+      <div className={'p-4 flex flex-row items-center'}>
+        <span className={'text-xs'}>Show</span>
+        <Popover className={'mx-3 relative'}>
+          <Popover.Button
+            className={
+              'flex flex-row gap-1 items-center cursor-pointer rounded-lg bg-light-grey dark:bg-dark p-2'
+            }
+          >
+            <span className={'text-xs'}>{limit}</span>
+            <Icon
+              name={'sort-desc'}
+              className={'fill-grey dark:fill-white self-start'}
+              style={{ width: '12px', height: '12px' }}
+            />
+          </Popover.Button>
+          <Popover.List
+            className={
+              'flex flex-col gap-1 px-4 py-2 bg-light-grey dark:bg-dark top-[110%] rounded-lg'
+            }
+          >
+            {limit != 10 && (
+              <Popover.ListItem className={'cursor-pointer'}>
+                <span onClick={() => setLimit(10)}>10</span>
+              </Popover.ListItem>
+            )}
+            {limit != 25 && (
+              <Popover.ListItem className={'cursor-pointer'}>
+                <span onClick={() => setLimit(25)}>25</span>
+              </Popover.ListItem>
+            )}
+            {limit != 50 && (
+              <Popover.ListItem className={'cursor-pointer'}>
+                <span onClick={() => setLimit(50)}>50</span>
+              </Popover.ListItem>
+            )}
+          </Popover.List>
+        </Popover>
+
+        <span className={'text-xs'}>entries</span>
+
+        <label className={'relative max-w-64 ml-6'}>
+          <Icon
+            name={'search'}
+            className={'fill-grey dark:fill-white absolute top-2 left-2'}
+            style={{ width: '16px', height: '16px' }}
+          />
+          <Input
+            name={'filter'}
+            placeholder={'Search...'}
+            handleChange={(e: ChangeEvent<HTMLInputElement>) =>
+              onFilterChange(e.target.value)
+            }
+            className={
+              'text-xs border border-grey dark:border-white text-grey dark:text-white rounded-lg pl-8 placeholder:text-grey dark:placeholder:text-white'
+            }
+          />
+        </label>
+      </div>
       <Table>
         <Table.Head>
           <Table.Row className='odd:bg-white dark:odd:bg-violet-dark grid orders-table-columns items-center'>
@@ -101,7 +190,7 @@ export const OrdersTable: FC = ({}) => {
         </Table.Head>
 
         <Table.Body>
-          {sortedOrders.map((order) => {
+          {paginatedOrders.map((order) => {
             const {
               trackingId,
               productName,
@@ -161,6 +250,14 @@ export const OrdersTable: FC = ({}) => {
           })}
         </Table.Body>
       </Table>
-    </div>
+
+      <div className={'p-4'}>
+        <OrdersPaginationControlPanel
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
+      </div>
+    </>
   );
 };

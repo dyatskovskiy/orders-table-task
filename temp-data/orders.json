@@ -30,16 +30,6 @@
     "status": "Delivered"
   },
   {
-    "trackingId": 93663,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Integrated directional superstructure",
-    "customer": "Meagan Nguyen",
-    "date": "2024-07-22",
-    "amount": 331.22,
-    "paymentMode": "Cash on Delivery",
-    "status": "Process"
-  },
-  {
     "trackingId": 21580,
     "productImage": "https://picsum.photos/2000/3000",
     "productName": "Fundamental zero tolerance infrastructure",
@@ -108,16 +98,6 @@
     "amount": 33.79,
     "paymentMode": "Debit Card",
     "status": "Process"
-  },
-  {
-    "trackingId": 80071,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Seamless zero-defect array",
-    "customer": "Devin Mcdaniel",
-    "date": "2023-12-08",
-    "amount": 837.75,
-    "paymentMode": "Credit Card",
-    "status": "Cancelled"
   },
   {
     "trackingId": 47486,
@@ -387,16 +367,6 @@
     "date": "2023-08-27",
     "amount": 213.01,
     "paymentMode": "Debit Card",
-    "status": "Delivered"
-  },
-  {
-    "trackingId": 71482,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Programmable directional firmware",
-    "customer": "Marcia Smith",
-    "date": "2024-08-21",
-    "amount": 820.64,
-    "paymentMode": "Bank Transfer",
     "status": "Delivered"
   },
   {
@@ -2808,16 +2778,6 @@
     "amount": 409.54,
     "paymentMode": "Debit Card",
     "status": "Cancelled"
-  },
-  {
-    "trackingId": 19894,
-    "productImage": "https://picsum.photos/2000/3000",
-    "productName": "Universal 24/7 circuit",
-    "customer": "Robert Wheeler",
-    "date": "2024-08-15",
-    "amount": 285.41,
-    "paymentMode": "Bank Transfer",
-    "status": "Delivered"
   },
   {
     "trackingId": 84658,
